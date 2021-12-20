@@ -1,23 +1,23 @@
 import SwiftUI
 import shared
+import KMPNativeCoroutinesAsync
 
 struct ContentView: View {
-    let useCase = GetUsersUseCase()
-
     @ObservedObject
     var store: ObservableUserStore
 
     init() {
-        store = ObservableUserStore(store: UsersStateStore(getUsersUseCase: useCase))
+        store = ObservableUserStore()
     }
 
     var body: some View {
-        if store.loading {
+        if store.state == nil || store.state is UsersState.Loading {
             ProgressView()
                 .transition(.opacity)
         } else {
-            UsersList(users: store.users)
+            UsersList(users: (store.state as! UsersState.Users).users)
                 .transition(.opacity)
+                .onDisappear(perform: { store.stopListeningState() })
         }
     }
 }
@@ -45,29 +45,31 @@ struct UserView: View {
     }
 }
 
+@MainActor
 class ObservableUserStore: ObservableObject {
     @Published
-    public var loading: Bool = true
-    @Published
-    public var users: [User] = []
-
+    public var state: UsersState? = nil
+    
     let store: UsersStateStore
-    var stateWatcher: Closeable?
+    private var stateHandle: Task<(), Never>? = nil
 
-    init(store: UsersStateStore) {
-        self.store = store
+    init() {
+        let useCase = GetUsersUseCase()
+        self.store = UsersStateStore(getUsersUseCase: useCase)
 
-        stateWatcher = self.store.watchState().watch { [weak self] state in
-            if state is UsersState.Loading {
-                self!.loading = true
-            } else {
-                self!.loading = false
-                self!.users = (state as! UsersState.Users).users
+        stateHandle = Task {
+            do {
+                let stream = asyncStream(for: store.stateNative)
+                for try await state in stream {
+                    self.state = state
+                }
+            } catch {
+                print("Failed with error: \(error)")
             }
         }
     }
 
-    deinit {
-        stateWatcher?.close()
+    func stopListeningState() {
+        stateHandle?.cancel()
     }
 }

@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     kotlin("plugin.serialization") version "1.5.31"
+    id("com.rickclephas.kmp.nativecoroutines") version "0.10.1"
     id("com.android.library")
 }
 
@@ -22,7 +23,7 @@ kotlin {
             baseName = "shared"
         }
     }
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {
