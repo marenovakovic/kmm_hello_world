@@ -1,6 +1,5 @@
 import SwiftUI
 import shared
-import KMPNativeCoroutinesAsync
 
 struct ContentView: View {
     @ObservedObject
@@ -42,34 +41,5 @@ struct UserView: View {
             Text(user.username)
             Text(user.email)
         }
-    }
-}
-
-@MainActor
-class ObservableUserStore: ObservableObject {
-    @Published
-    public var state: UsersState? = nil
-    
-    let store: UsersStateStore
-    private var stateHandle: Task<(), Never>? = nil
-
-    init() {
-        let useCase = GetUsersUseCase()
-        self.store = UsersStateStore(getUsersUseCase: useCase)
-
-        stateHandle = Task {
-            do {
-                let stream = asyncStream(for: store.stateNative)
-                for try await state in stream {
-                    self.state = state
-                }
-            } catch {
-                print("Failed with error: \(error)")
-            }
-        }
-    }
-
-    func stopListeningState() {
-        stateHandle?.cancel()
     }
 }
