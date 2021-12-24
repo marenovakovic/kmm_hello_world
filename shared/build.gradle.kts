@@ -3,6 +3,7 @@ plugins {
     kotlin("native.cocoapods")
     kotlin("plugin.serialization") version "1.5.31"
     id("com.rickclephas.kmp.nativecoroutines") version "0.10.1"
+    id("io.github.sergeshustoff.dikt") version "1.0.0-alpha7"
     id("com.android.library")
 }
 

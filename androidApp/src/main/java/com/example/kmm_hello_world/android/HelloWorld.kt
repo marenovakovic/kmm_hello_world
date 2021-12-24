@@ -22,7 +22,7 @@ import com.example.kmm_hello_world.UsersStateStore
 fun HelloWorld(usersStateStore: UsersStateStore) {
     val state by usersStateStore.state.collectAsState()
 
-    Crossfade(modifier = Modifier.fillMaxSize(), targetState = state, ) { targetState ->
+    Crossfade(modifier = Modifier.fillMaxSize(), targetState = state) { targetState ->
         when (targetState) {
             UsersState.Loading -> LoadingIndicator()
             is UsersState.Users -> Users(targetState.users)

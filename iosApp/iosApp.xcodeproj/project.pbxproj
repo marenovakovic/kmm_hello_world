@@ -15,6 +15,7 @@
 		EB389E6D2770EA4900427806 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = EB389E6C2770EA4900427806 /* KMPNativeCoroutinesAsync */; };
 		EB389E6F2770EA4900427806 /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = EB389E6E2770EA4900427806 /* KMPNativeCoroutinesCombine */; };
 		EB389E712770EA4900427806 /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = EB389E702770EA4900427806 /* KMPNativeCoroutinesCore */; };
+		EB7EA9672775F635000EBABD /* UsersStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7EA9662775F635000EBABD /* UsersStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D008F80CEC91AC181C74451 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
+		EB7EA9662775F635000EBABD /* UsersStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
+				EB7EA9662775F635000EBABD /* UsersStore.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB7EA9672775F635000EBABD /* UsersStore.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
