@@ -6,12 +6,10 @@ class ObservableUserStore: ObservableObject {
     @Published
     public var state: UsersState? = nil
     
-    let store: UsersStateStore
+    let store: UsersStateStore = UsersModule().usersStateSource()
     private var stateHandle: Task<(), Never>? = nil
 
     init() {
-        self.store = UsersModule().usersStateSource()
-
         stateHandle = Task {
             do {
                 let stream = asyncStream(for: store.stateNative)
